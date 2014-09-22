@@ -43,7 +43,7 @@ beautiful.init(awful.util.getdir("config") .. "/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "terminator"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -308,7 +308,11 @@ globalkeys = awful.util.table.join(
     -- Suspend
     awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn("systemctl suspend") end),
     -- Lock and suspend
-    awful.key({ modkey, "Shift" }, "x", function () awful.util.spawn("lock-and-suspend") end)
+    awful.key({ modkey, "Shift" }, "x", function () awful.util.spawn("lock-and-suspend") end),
+    -- start browser (firefox)
+    awful.key({ modkey, "Shift" }, "b", function () awful.util.spawn("firefox") end),
+    -- start irc (hexchat)
+    awful.key({ modkey, "Shift" }, "i", function () awful.util.spawn("hexchat") end)
 )
 
 clientkeys = awful.util.table.join(
