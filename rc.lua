@@ -2,6 +2,7 @@
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
+vicious = require("vicious")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
@@ -12,6 +13,7 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local battery = require("battery")
 local clocker = require("clocker")
+local memwatch = require("memwatch")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -188,10 +190,10 @@ for s = 1, screen.count() do
 
     -- Create battery widgets
     batterywidget0 = wibox.widget.textbox()
-    batterywidget1 = wibox.widget.textbox()
+    -- batterywidget1 = wibox.widget.textbox()
 
     batteryInfo("BAT0", batterywidget0, 10)
-    batteryInfo("BAT1", batterywidget1, 10)
+    -- batteryInfo("BAT1", batterywidget1, 10)
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -201,10 +203,11 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
+    right_layout:add(clockerwidget)
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(wibox.layout.margin(clockerwidget, 2, 2, 0, 0))
-    right_layout:add(wibox.layout.margin(batterywidget0, 2, 2, 0, 0))
-    right_layout:add(wibox.layout.margin(batterywidget1, 2, 2, 0, 0))
+    right_layout:add(batterywidget0)
+    -- right_layout:add(batterywidget1)
+    right_layout:add(memwidget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
